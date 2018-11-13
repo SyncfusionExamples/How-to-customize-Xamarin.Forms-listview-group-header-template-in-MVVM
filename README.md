@@ -2,8 +2,6 @@
 
 This example demonstrates How to customize Xamarin.Forms listview group header template in MVVM.
 
-See [How to customize Xamarin.Forms listview group header template in MVVM]
-
 ## <a name="requirements-to-run-the-demo"></a>Requirements to run the demo ##
 
 * [Visual Studio 2017](https://visualstudio.microsoft.com/downloads/) or [Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/).
