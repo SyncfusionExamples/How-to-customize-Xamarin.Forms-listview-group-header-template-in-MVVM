@@ -2,6 +2,84 @@
 
 This example demonstrates How to customize Xamarin.Forms listview group header template in MVVM.
 
+## Sample
+
+```xaml
+<Grid>
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    <Button x:Name="myButton" Grid.Row="0" Command="{Binding ChangeVisibility}" Text="Change Label Visibility"/>
+    <syncfusion:SfListView Grid.Row="1" x:Name="listView" BackgroundColor="AliceBlue" 
+                            ItemSpacing="3" ItemSize="70" AllowGroupExpandCollapse="True"
+                            GroupHeaderTemplate="{StaticResource GroupHeaderTemplate}"                                   
+                            ItemsSource="{Binding contactsinfo}">
+        <syncfusion:SfListView.DataSource>
+            <dataSource:DataSource>
+                <dataSource:DataSource.SortDescriptors>
+                    <dataSource:SortDescriptor PropertyName="ContactName" Direction="Ascending"/>
+                </dataSource:DataSource.SortDescriptors>
+                <dataSource:DataSource.GroupDescriptors>
+                    <dataSource:GroupDescriptor PropertyName="DisplayString" />
+                </dataSource:DataSource.GroupDescriptors>
+            </dataSource:DataSource>
+        </syncfusion:SfListView.DataSource>
+        <syncfusion:SfListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <ViewCell.View>
+                        <Grid x:Name="grid" RowSpacing="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="1" />
+                            </Grid.RowDefinitions>
+                            <Grid RowSpacing="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="70" />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid>
+                                    <Image Source="{Binding ContactImage}"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Center"
+                                            HeightRequest="50"/>
+
+                                </Grid>
+
+                                <Grid Grid.Column="1"
+                                        RowSpacing="1"
+                                        Padding="10,0,0,0"
+                                        VerticalOptions="Center">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+
+                                    <Label LineBreakMode="WordWrap"
+                                            TextColor="#474747"
+                                            Text="{Binding ContactName}">
+                                    </Label>
+                                    <Label Grid.Row="1"
+                                            Grid.Column="0"
+                                            TextColor="#474747"
+                                            
+                                            Text="{Binding ContactNumber}">
+                                    </Label>
+                                </Grid>
+                            </Grid>
+                            <StackLayout Grid.Row="1" BackgroundColor="Gray" HeightRequest="1"/>
+                        </Grid>
+                    </ViewCell.View>
+                </ViewCell>
+            </DataTemplate>
+        </syncfusion:SfListView.ItemTemplate>
+    </syncfusion:SfListView>
+</Grid>
+```
+
 ## <a name="requirements-to-run-the-demo"></a>Requirements to run the demo ##
 
 * [Visual Studio 2017](https://visualstudio.microsoft.com/downloads/) or [Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/).
