@@ -5,26 +5,33 @@ This example demonstrates How to customize Xamarin.Forms listview group header t
 ## Sample
 
 ```xaml
+<ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Name="GroupHeaderTemplate"  x:Key="GroupHeaderTemplate">
+                <ViewCell>
+                    <ViewCell.View>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="40" />
+                            </Grid.ColumnDefinitions>
+                            <Image x:Name="NormalImage" Grid.Column="0" HorizontalOptions="Center"
+                        Source="{Binding IsExpand, Converter={StaticResource BoolToImageConverter}}"
+                        VerticalOptions="Center"/>
+                            <Label x:Name="label" Text="{Binding Key}" Grid.Column="1" 
+                        IsVisible="{Binding Path=BindingContext.IsLabelVisible,
+                        Source={x:Reference listView}}"/>
+                        </Grid>
+                    </ViewCell.View>
+                </ViewCell>
+            </DataTemplate>
+        </ResourceDictionary>
+</ContentPage.Resources>
 <Grid>
-    <Grid.RowDefinitions>
-        <RowDefinition Height="Auto"/>
-        <RowDefinition Height="*"/>
-    </Grid.RowDefinitions>
-    <Button x:Name="myButton" Grid.Row="0" Command="{Binding ChangeVisibility}" Text="Change Label Visibility"/>
-    <syncfusion:SfListView Grid.Row="1" x:Name="listView" BackgroundColor="AliceBlue" 
-                            ItemSpacing="3" ItemSize="70" AllowGroupExpandCollapse="True"
+    <syncfusion:SfListView x:Name="listView"
                             GroupHeaderTemplate="{StaticResource GroupHeaderTemplate}"                                   
                             ItemsSource="{Binding contactsinfo}">
-        <syncfusion:SfListView.DataSource>
-            <dataSource:DataSource>
-                <dataSource:DataSource.SortDescriptors>
-                    <dataSource:SortDescriptor PropertyName="ContactName" Direction="Ascending"/>
-                </dataSource:DataSource.SortDescriptors>
-                <dataSource:DataSource.GroupDescriptors>
-                    <dataSource:GroupDescriptor PropertyName="DisplayString" />
-                </dataSource:DataSource.GroupDescriptors>
-            </dataSource:DataSource>
-        </syncfusion:SfListView.DataSource>
         <syncfusion:SfListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
@@ -35,18 +42,11 @@ This example demonstrates How to customize Xamarin.Forms listview group header t
                                 <RowDefinition Height="1" />
                             </Grid.RowDefinitions>
                             <Grid RowSpacing="1">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="70" />
-                                </Grid.ColumnDefinitions>
-
                                 <Grid>
                                     <Image Source="{Binding ContactImage}"
                                             VerticalOptions="Center"
                                             HorizontalOptions="Center"
                                             HeightRequest="50"/>
-
                                 </Grid>
 
                                 <Grid Grid.Column="1"
